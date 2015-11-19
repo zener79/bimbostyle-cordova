@@ -33,7 +33,7 @@ angular.module('starter', ['ionic', 'ngCordova', 'starter.controllers'])
     })  
 
   // if none of the above states are matched, use this as the fallback
-  $urlRouterProvider.otherwise('/intro1');
+  $urlRouterProvider.otherwise('/ready');
 })
 
 
