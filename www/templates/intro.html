@@ -1,0 +1,85 @@
+  <ion-slide-box on-slide-changed="slideChanged(index)" >
+    <ion-slide>
+      <div class="padding">
+        <img src="img/logo.png" class="fullwidth">
+        <h3>Grazie per aver scaricato l'app</h3>
+        <br>
+        <p>
+          Vendere i tuoi articoli non è mai stato così semplice.
+        </p>
+        <p>
+          Segui questo breve tutorial per scoprire come fare per inviare le foto dei tuoi oggetti direttamente dal tuo smartphone
+        </p>
+        <br><br>
+        <div class="row row-bottom">
+          <div class="col col-offset-33">
+            <div class="animated rotateInDownLeft">
+              <img src="img/arrow.png" class="animate bounceInDown" style="-webkit-animation-delay: 2s;">
+            </div>
+          </div>
+
+          <div class="col">
+            <button class="button  icon-right ion-chevron-right button-balanced" ng-click="next()">
+              Avanti
+            </button>
+          </div>
+        </div>
+      </div>
+    </ion-slide>
+    <ion-slide>
+      <div class="padding">
+        <h3>Effettua il login</h3>
+        <p>Puoi anche utilizzare il tuo account <b>google</b> o <b>facebook</b></p>
+          <img src="img/laptop1.png" class="fullwidth">
+        <br>
+        <br>
+        <p>
+          Una volta effettuato il login clicca su "Vendi" in alto a destra
+        </p>
+        <br>
+
+        <div class="row row-bottom">
+          <div class="col col-offset-33">
+          </div>
+
+          <div class="col">
+            <button class="button  icon-right ion-chevron-right button-balanced" ng-click="next()">
+              Avanti
+            </button>
+          </div>
+        </div>
+      </div>
+    </ion-slide>
+    <ion-slide>
+      <div class="padding">
+        <p>Inquadra con questa App il Qr-code che ti verrà mostrato </p>
+          <img src="img/laptop2.png" class="fullwidth">
+        <br>
+        <br>
+        <p>
+          ed inizia a scattare le foto del tuo oggetto
+        </p>
+        <h3> Niente di più semplice</h3>
+        <br>
+
+        <div class="row row-bottom">
+
+          <div class="col">
+            <button class="button  icon-right ion-chevron-right button-balanced" ng-controller="ScanController" ng-click="scanBarcode()">
+              Inizia e scansiona il Qr-code
+            </button>
+          </div>
+        </div>
+      </div>
+    </ion-slide>
+  </ion-slide-box>
+</ion-view>
+<ion-footer-bar align-title="left" class="" ng-show="slideIndex != 2">
+  <label class ="checkbox">
+    <input type="checkbox">
+  </label><span class="dont-ask">Non chiedere più</span>
+  <div class="title"></div>
+  <div class="buttons" ng-click="doSomething()">
+    <button class="button">Salta intro</button>
+  </div>
+</ion-footer-bar>

@@ -19,21 +19,18 @@ angular.module('starter', ['ionic', 'ngCordova', 'starter.controllers'])
 })
 .config(function($stateProvider, $urlRouterProvider){
   $stateProvider
-    .state('intro1', {
-      url: '/intro1',
-      templateUrl: 'templates/intro1.html'
+    .state('intro', {
+      url: '/',
+      templateUrl: 'templates/intro.html',
+      controller: 'IntroCtrl'
     })  
-    .state('intro2', {
-      url: '/intro2',
-      templateUrl: 'templates/intro2.html'
-    })  
-    .state('ready', {
-      url: '/ready',
+    .state('main', {
+      url: 'main',
       templateUrl: 'templates/ready.html'
     })  
 
   // if none of the above states are matched, use this as the fallback
-  $urlRouterProvider.otherwise('/ready');
+  $urlRouterProvider.otherwise('/');
 })
 
 
