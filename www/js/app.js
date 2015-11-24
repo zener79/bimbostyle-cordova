@@ -20,20 +20,56 @@ angular.module('starter', ['ionic', 'ngCordova', 'starter.controllers'])
 .config(function($stateProvider, $urlRouterProvider){
   $stateProvider
     .state('intro', {
-      url: '/',
+      url: '/intro',
       templateUrl: 'templates/intro.html',
       controller: 'IntroCtrl'
     })  
-    .state('main', {
-      url: 'main',
-      templateUrl: 'templates/ready.html'
+    .state('shot', {
+      url: 'shot',
+      templateUrl: 'templates/shot.html'
+    })  
+    .state('scan', {
+      url: 'scan',
+      templateUrl: 'templates/scan.html'
     })  
 
   // if none of the above states are matched, use this as the fallback
-  $urlRouterProvider.otherwise('/');
+  $urlRouterProvider.otherwise(function($injector, $location){
+    var state = $injector.get('$state');
+    var localstorage = $injector.get('$localstorage');
+    if(localstorage.get("hide_intro") == "true")
+      state.go('scan');
+    else
+      state.go('intro');
+    return $location.path();
+  });
 })
 
-
+.factory('$localstorage', ['$window', function($window) {
+  return {
+    set: function(key, value) {
+      $window.localStorage[key] = value;
+    },
+    get: function(key, defaultValue) {
+      return $window.localStorage[key] || defaultValue;
+    },
+    setObject: function(key, value) {
+      $window.localStorage[key] = JSON.stringify(value);
+    },
+    getObject: function(key) {
+      return JSON.parse($window.localStorage[key] || '{}');
+    }
+  }
+}])
+.service('$cameraService', function() {
+  this.article= 0;
+  this.article = function() {
+        return this.article;
+  };
+  this.setArticle = function(id) {
+        this.article = id;
+  };
+})
 
 
 

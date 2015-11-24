@@ -1,0 +1,16 @@
+<div class="padding">
+  <div align="center">
+  <p><img src="img/logo.png" class="fullwidth"></p>
+  <h1>Perfetto!</h1><h3> Adesso invia una foto</h3>
+</div>
+      <button class="button button-block icon-right ion-camera button-balanced" ng-controller="PhotoController" ng-click="takePhoto()">
+        Scatta una foto
+      </button>
+      <button class="button button-block icon-right ion-images button-balanced" ng-controller="PhotoController" ng-click="choosePhoto()">
+        Scegli una foto
+      </button>
+  <h3 style="text-align:center">oppure</h1>
+          <button class="button button-block  icon-right ion-qr-scanner button-calm" ng-controller="ScanController" ng-click="scanBarcode()">
+              Scansiona un nuovo codice
+            </button>
+</div>

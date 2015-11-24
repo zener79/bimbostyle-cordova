@@ -1,7 +1,13 @@
 angular.module('starter.controllers', [])
-.controller('IntroCtrl', function($scope, $state, $ionicSlideBoxDelegate) {
+.controller('IntroCtrl', function($scope, $state, $ionicSlideBoxDelegate, $localstorage) {
+  $scope.hideIntro=false;
   $scope.startApp = function() {
-    $state.go('main');
+    if($scope.hideIntro)
+      $localstorage.setObject('hide_intro', true);
+    else
+      $localstorage.setObject('hide_intro', false);
+    console.log($localstorage.get("hide_intro"));
+    $state.go('scan');
   };
   $scope.next = function() {
     $ionicSlideBoxDelegate.next();
@@ -13,52 +19,86 @@ angular.module('starter.controllers', [])
     $scope.slideIndex = index;
   };
 })
-.controller("ScanController", function($scope, $state, $cordovaBarcodeScanner) {
+.controller("ScanController", function($scope, $state, $cordovaBarcodeScanner, $cameraService) {
     $scope.scanBarcode = function() {
         $cordovaBarcodeScanner.scan().then(function(imageData) {
             // alert(imageData.text);
-            console.log("Barcode Format -> " + imageData.format);
-            console.log("Cancelled -> " + imageData.cancelled);
-            // $location.path('ready');
-            $state.go('ready');
+            // console.log("Barcode Format -> " + imageData.format);
+            // console.log("Cancelled -> " + imageData.cancelled);
+            if(imageData.text!=""){
+              $cameraService.setArticle(imageData.text);
+              $state.go('shot');
+            }
         }, function(error) {
             console.log("An error happened -> " + error);
         });
     };
 })
-.controller("PhotoController", function($scope, $state, $cordovaCamera) {
+.controller("PhotoController", function($scope, $state, $cordovaCamera, $cameraService, $cordovaFileTransfer, $ionicPopup, $ionicLoading) {
   $scope.takePhoto = function () {
     var options = {
       quality: 75,
       destinationType: Camera.DestinationType.FILE_URI,
       sourceType: Camera.PictureSourceType.CAMERA,
       encodingType: Camera.EncodingType.JPEG,
-      targetWidth: 600,
-      targetHeight: 600,
+      targetWidth: 1000,
+      targetHeight: 1000,
       saveToPhotoAlbum: true
     };
 
-    $cordovaCamera.getPicture(options).then(function (imageURL) {
-      $scope.imgURI = "data:image/jpeg;base64," + imageData;
+    $cordovaCamera.getPicture(options).then(function (imageURI) {
+      $scope.my_upload(imageURI);
     }, function (err) {
         // An error occured. Show a message to the user
     });
   }
-  
   $scope.choosePhoto = function () {
     var options = {
       quality: 75,
       destinationType: Camera.DestinationType.FILE_URI,
       sourceType: Camera.PictureSourceType.PHOTOLIBRARY,
-      targetWidth: 600,
-      targetHeight: 600,
+      targetWidth: 1000,
+      targetHeight: 1000,
     };
 
-    $cordovaCamera.getPicture(options).then(function (imageData) {
-      $scope.imgURI = "data:image/jpeg;base64," + imageData;
+    $cordovaCamera.getPicture(options).then(function (imageURI) {
+      $scope.my_upload(imageURI);
     }, function (err) {
       // An error occured. Show a message to the user
     });
   }
-});
+  $scope.my_upload = function(imageURI) {
+    $ionicLoading.show();
+    var options = new FileUploadOptions();
+    options.fileKey = "fotografia[foto]";
+    options.fileName = imageURI.substr(imageURI.lastIndexOf('/') + 1);
+    if(options.fileName.lastIndexOf('?') > -1)
+      options.fileName = options.fileName.substr(0,options.fileName.lastIndexOf('?'));
+    options.mimeType = "image/jpeg";
+    var params = {};
+    params.articolo_id = $cameraService.article;
+    params.from_app = "true";
+    options.params=params;
+    console.log("upload start");
+    $cordovaFileTransfer.upload("http://home.z3n.it:3000/fotografie", imageURI,  options).then(function(results){
+      console.log("upload success");
+      $ionicLoading.hide();
+      $scope.showConfirm();
+    }, function(err){
+      $ionicLoading.hide();
+      console.log(err);
+    }, function(progress){
+      console.log("upload progress");
+    });
+  }
+  $scope.showConfirm = function() {
+    var confirmPopup = $ionicPopup.alert({
+      title: "Foto inviata con successo",
+      template: "Entro pochi secondi dovresti veder comparire la foto direttamente sul monitor del tuo PC",
+    });
+  }
+  $scope.exitApp = function() {
+    $ionicPlatform.exitApp();
+  }
 
+});

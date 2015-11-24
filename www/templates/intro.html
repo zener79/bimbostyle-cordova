@@ -1,5 +1,5 @@
   <ion-slide-box on-slide-changed="slideChanged(index)" >
-    <ion-slide>
+    <ion-slide class="slide1">
       <div class="padding">
         <img src="img/logo.png" class="fullwidth">
         <h3>Grazie per aver scaricato l'app</h3>
@@ -26,10 +26,10 @@
         </div>
       </div>
     </ion-slide>
-    <ion-slide>
+    <ion-slide class="slide2">
       <div class="padding">
         <h3>Effettua il login</h3>
-        <p>Puoi anche utilizzare il tuo account <b>google</b> o <b>facebook</b></p>
+        <p>Accedi a <i>https://bimbo.style</i> dal tuo PC per effettuare il login o registrarti. Puoi anche utilizzare direttamente il tuo account <b>google</b> o <b>facebook</b></p>
           <img src="img/laptop1.png" class="fullwidth">
         <br>
         <br>
@@ -50,7 +50,7 @@
         </div>
       </div>
     </ion-slide>
-    <ion-slide>
+    <ion-slide class="slide3">
       <div class="padding">
         <p>Inquadra con questa App il Qr-code che ti verrà mostrato </p>
           <img src="img/laptop2.png" class="fullwidth">
@@ -65,8 +65,8 @@
         <div class="row row-bottom">
 
           <div class="col">
-            <button class="button  icon-right ion-chevron-right button-balanced" ng-controller="ScanController" ng-click="scanBarcode()">
-              Inizia e scansiona il Qr-code
+            <button class="button  icon-right ion-chevron-right button-balanced" ng-click="startApp()">
+              Inizia subito! 
             </button>
           </div>
         </div>
@@ -76,10 +76,10 @@
 </ion-view>
 <ion-footer-bar align-title="left" class="" ng-show="slideIndex != 2">
   <label class ="checkbox">
-    <input type="checkbox">
-  </label><span class="dont-ask">Non chiedere più</span>
+    <input type="checkbox" ng-model="hideIntro">
+  </label><span class="dont-ask">Non mostrare più</span>
   <div class="title"></div>
-  <div class="buttons" ng-click="doSomething()">
-    <button class="button">Salta intro</button>
+  <div class="buttons" ng-click="startApp()">
+    <button class="button">Salta tutorial</button>
   </div>
 </ion-footer-bar>
