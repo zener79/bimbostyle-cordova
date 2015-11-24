@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<widget id="com.ionicframework.bimbostyle810943" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+<widget id="it.z3n.bimbostyle" version="0.1.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
   <name>Bimbo.Style</name>
   <description>
         Il primo negozio dell'ustato COMPLETAMENTE ONLINE per il tuo bambino
     </description>
   <author email="claudio.benvenuti@gmail.com" href="http://www.z3n.it">
-      Ionic Framework Team
+      Claudio Benvenuti
     </author>
   <content src="index.html"/>
   <allow-navigation href="*"/>

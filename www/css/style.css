@@ -6,7 +6,7 @@ img.fullwidth{
   padding-top:10px;
 }
 .slider-pager{
-  margin-bottom:50px;
+  margin-bottom:35px;
 }
 body {
   /* cursor: url('http://ionicframework.com/img/finger.png'), auto; */
@@ -44,12 +44,7 @@ body {
 .button.ng-hide{
   display:none;
 }
-/* .slide1{ */
-/*   background-color: #D7FBE1; */
-/* } */
-/* .slide2{ */
-/*   background-color: #D1EDFD; */
-/* } */
-/* .slide3{ */
-/*   background-color: #F9CA9C; */
-/* } */
+
+.slider-slide, .pane{
+  background-image: url('../img/background.png');
+}

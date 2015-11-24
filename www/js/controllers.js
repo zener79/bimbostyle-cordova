@@ -80,7 +80,7 @@ angular.module('starter.controllers', [])
     params.from_app = "true";
     options.params=params;
     console.log("upload start");
-    $cordovaFileTransfer.upload("http://home.z3n.it:3000/fotografie", imageURI,  options).then(function(results){
+    $cordovaFileTransfer.upload("https://bimbo.style/fotografie", imageURI,  options).then(function(results){
       console.log("upload success");
       $ionicLoading.hide();
       $scope.showConfirm();
