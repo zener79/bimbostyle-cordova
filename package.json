@@ -28,5 +28,6 @@
   "cordovaPlatforms": [
     "android",
     "ios"
+    "wp8"
   ]
 }
