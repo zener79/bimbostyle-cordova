@@ -19,15 +19,20 @@ angular.module('starter.controllers', [])
     $scope.slideIndex = index;
   };
 })
-.controller("ScanController", function($scope, $state, $cordovaBarcodeScanner, $cameraService) {
+.controller("ScanController", function($scope, $state, $cordovaBarcodeScanner, $cameraService, $ionicPopup) {
     $scope.scanBarcode = function() {
         $cordovaBarcodeScanner.scan().then(function(imageData) {
-            // alert(imageData.text);
-            // console.log("Barcode Format -> " + imageData.format);
-            // console.log("Cancelled -> " + imageData.cancelled);
-            if(imageData.text!=""){
-              $cameraService.setArticle(imageData.text);
-              $state.go('shot');
+            text=imageData.text
+            if(text!=""){
+              if(text.substr(0,3) != "z3n"){
+                var alertPopup = $ionicPopup.alert({
+                  title: "ERRORE!!!",
+                  template: "Il codice scansionato non è un codice valido. Assicurati di scansionare il codice fornito da Bimbo.Style",
+                });
+              }else{
+                $cameraService.setArticle(text.substr(3,text.length));
+                $state.go('shot');
+              }
             }
         }, function(error) {
             console.log("An error happened -> " + error);
