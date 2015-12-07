@@ -63,5 +63,15 @@
     <splash src="resources/ios/splash/Default~iphone.png" width="320" height="480"/>
   </platform>
   <icon src="resources/android/icon/drawable-xhdpi-icon.png"/>
+  <plugin name="cordova-plugin-camera" source="npm"  />
+  <plugin name="cordova-plugin-console" source="npm"  />
+  <plugin name="cordova-plugin-device" source="npm"  />
+  <plugin name="cordova-plugin-file-transfer" source="npm"  />
+  <plugin name="cordova-plugin-file" source="npm"  />
+  <plugin name="cordova-plugin-splashscreen" source="npm"  />
+  <plugin name="cordova-plugin-statusbar" source="npm"  />
+  <plugin name="cordova-plugin-whitelist" source="npm"  />
+  <plugin name="ionic-plugin-keyboard" source="npm"  />
+  <plugin name="phonegap-plugin-barcodescanner" source="npm"  />
 
 <widget>
